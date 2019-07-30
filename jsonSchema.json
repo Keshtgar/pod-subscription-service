@@ -1,0 +1,356 @@
+{
+  "addSubscriptionPlan": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength" : 1
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0
+        },
+        "periodTypeCode": {
+          "type": "string",
+          "enum": ["SUBSCRIPTION_PLAN_PERIOD_TYPE_YEARLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_MONTHLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_DAILY"]
+        },
+        "periodTypeCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "usageCountLimit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "usageAmountLimit": {
+          "type": "number",
+          "minimum": 0
+        },
+        "type": {
+          "type": "string",
+          "enum": ["SUBSCRIPTION_PLAN_TYPE_BLOCK","SUBSCRIPTION_PLAN_TYPE_CASH"]
+        },
+        "guildCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permittedGuildCode": {
+          "type": "array",
+          "items": {
+            "type" : "string"
+          }
+        },
+        "permittedBusinessId": {
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "permittedProductId": {
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "integer"
+        }
+      },
+      "required": ["name", "price", "periodTypeCode", "periodTypeCount", "type", "productId", "guildCode"],
+      "additionalProperties": false
+    }
+  },
+  "subscriptionPlanList": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "periodTypeCode": {
+          "type": "string",
+          "enum": ["SUBSCRIPTION_PLAN_PERIOD_TYPE_YEARLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_MONTHLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_DAILY"]
+        },
+        "periodTypeCountFrom": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "periodTypeCountTo": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fromPrice": {
+          "type": "number",
+          "minimum": 0
+        },
+        "toPrice": {
+          "type": "number",
+          "minimum": 0
+        },
+        "typeCode": {
+          "type": "string",
+          "enum": ["SUBSCRIPTION_PLAN_TYPE_BLOCK","SUBSCRIPTION_PLAN_TYPE_CASH"]
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "enable": {
+          "type": "string"
+        },
+        "permittedGuildCode": {
+          "type": "array",
+          "items": {
+            "type" : "string"
+          }
+        },
+        "permittedBusinessId": {
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "permittedProductId": {
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "currencyCode": {
+          "type": "string"
+        }
+      },
+      "required": ["offset", "size"],
+      "additionalProperties": false
+    }
+  },
+  "updateSubscriptionPlan": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "periodTypeCode": {
+          "type": "string",
+          "enum": ["SUBSCRIPTION_PLAN_PERIOD_TYPE_YEARLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_MONTHLY", "SUBSCRIPTION_PLAN_PERIOD_TYPE_DAILY"]
+        },
+        "periodTypeCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "usageCountLimit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "usageAmountLimit": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0
+        },
+        "enable": {
+          "type": "string"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": false
+    }
+  },
+  "requestSubscription": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "subscriptionPlanId": {
+          "type": "integer"
+        },
+        "userId": {
+          "type": "integer"
+        }
+      },
+      "required": ["subscriptionPlanId", "userId"],
+      "additionalProperties": false
+    }
+  },
+  "confirmSubscription": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": ["subscriptionId", "code"],
+      "additionalProperties": false
+    }
+  },
+  "subscriptionList": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "subscriptionPlanId": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["subscriptionPlanId", "offset", "size"],
+      "additionalProperties": false
+    }
+  },
+  "consumeSubscription": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": true
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "usedAmount": {
+          "type": "number"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": false
+    }
+  }
+}
